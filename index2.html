@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+	<link rel="shortcut icon" type="image/jpg" href="icon.jpg"/>	
+	<style type="text/css">
+		#box{
+			position:absolute;
+			bottom:55px;
+			height:140px;
+			width:345px;
+			background:transparent;
+		}
+		#b{
+			background-image:url('bg.gif');
+			background-repeat: no-repeat;
+  			background-attachment: fixed;
+  			background-size: cover;
+		}
+
+	</style>
+	<script>
+		var btn1=document.createElement('div');
+		var btn2=document.createElement('div');
+		
+		var btn3=document.createElement('div');
+		var btn4=document.createElement('div');
+	
+		var b1=document.createElement('button');
+		var b2=document.createElement('button');
+
+		var b3=document.createElement('button');
+		var b4=document.createElement('div');
+	
+		
+		btn1.style.position='relative';
+		btn1.style.top='0px';
+		btn1.style.left='8px';
+		btn1.style.height='0px';
+		btn1.style.width='0px';
+		btn1.style.borderRadius='15%';
+		btn1.style.transform='rotate(-135deg)';
+		btn1.style.borderTop='15px solid transparent';
+		btn1.style.borderBottom='15px solid #49fb35';
+		btn1.style.borderLeft='15px solid #49fb35';
+		btn1.style.borderRight='15px solid transparent';
+		b1.appendChild(btn1);
+		
+		btn2.style.position='relative';
+		btn2.style.top='0px';
+		btn2.style.left='20px';
+		btn2.style.height='25px';
+		btn2.style.width='10px';
+		btn2.style.borderRadius='15%';
+		btn2.style.border='solid';
+		btn2.style.borderColor='transparent #49fb35 transparent #49fb35';
+		btn2.style.borderWidth='8px';
+		btn2.style.background='transperent';
+		b2.appendChild(btn2);
+		
+		btn3.style.position='relative';
+		btn3.style.top='0px';
+		btn3.style.left='10px';
+		btn3.style.height='0px';
+		btn3.style.width='0px';
+		btn3.style.borderRadius='15%';
+		btn3.style.transform='rotate(-135deg)';
+		btn3.style.borderTop='20px solid transparent';
+		btn3.style.borderBottom='10px solid #49fb35';
+		btn3.style.borderLeft='10px solid #49fb35';
+		btn3.style.borderRight='20px solid transparent';
+		b3.appendChild(btn3);
+
+		b1.onclick=function(){plays();}
+		
+		var songs=['op/1.mp3','op/2.mp3','op/3.mp3','op/4.mp3','op/5.mp3','op/6.mp3','op/7.mp3','op/8.mp3','op/9.mp3','op/10.mp3','op/11.mp3','op/12.mp3','op/13.mp3','op/14.mp3','op/15.mp3','op/16.mp3','op/17.mp3','op/18.mp3','op/19.mp3','op/20.mp3','op/21.mp3','op/22.mp3','op/23.mp3','op/24.mp3','op/25.mp3','op/26.mp3','op/27.mp3','op/28.mp3','op/29.mp3','op/30.mp3'];  
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<body id='b'>
+	<center><div id="box"></div></center>
+	<script type="text/javascript">
+		var box=document.getElementById('box');
+		
+		b1.style.marginTop='30px';
+		b1.style.height='80px';
+		b1.style.width='80px';
+		b1.style.borderRadius='50%';
+		b1.style.border='solid';
+		b1.style.borderColor='#49fb35';
+		b1.style.cursor='pointer';
+		b1.style.background='#000000';
+		box.appendChild(b1);
+		
+		b2.style.marginTop='30px';
+		b2.style.height='80px';
+		b2.style.width='80px';
+		b2.style.borderRadius='50%';
+		b2.style.cursor='pointer';
+		b2.style.border='solid';
+		b2.style.borderColor='#49fb35';
+		b2.style.background='#000000';
+		b2.style.fontSize='40px';
+
+		b3.style.marginTop='30px';
+		b3.style.marginRight='20px';
+		b3.style.float='right';
+		b3.style.height='80px';
+		b3.style.width='80px';
+		b3.style.borderRadius='50%';
+		b3.style.border='solid';
+		b3.style.borderColor='#49fb35';
+		b3.style.fontSize='40px';
+		b3.style.cursor='pointer';
+		b3.style.background='#000000';
+		box.appendChild(b3);
+
+		b4.style.marginTop='40px';
+		b4.style.marginLeft='20px';
+		b4.style.float='left';
+		b4.style.height='70px';
+		b4.style.width='70px';
+		b4.style.background='transparent';
+		box.appendChild(b4)
+		
+		let isplaying=false;
+		function plays(){
+			var current=Math.round(songs.length*Math.random());
+			var audio=new Audio(songs[current]);
+			audio.play();
+			b1.remove();
+			b3.onclick=function(){next();}
+			b2.onclick=function(){pause();}
+			b1.onclick=function(){resume();}
+			audio.onplaying=function(){isplaying=true;}
+			audio.onpause=function(){isplaying=false;}
+			audio.addEventListener('ended',plays);
+			box.appendChild(b2);
+			function next(){
+					audio.pause();
+					plays();
+			}
+
+			function pause(){
+				if (!audio.paused && isplaying){
+					audio.pause();
+					b2.remove();
+					box.appendChild(b1);
+				}
+			}
+			function resume(){
+				if (audio.paused && !isplaying){
+					audio.play();
+					b1.remove();
+					box.appendChild(b2);			
+				}	
+			}
+			
+		}
+	</script>	
+</body>
+</html>
